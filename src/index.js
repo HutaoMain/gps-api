@@ -2,14 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotEnv = require("dotenv");
 const cors = require("cors");
-const passport = require("passport");
 const expressSession = require("express-session");
 
 dotEnv.config();
 
-// const UserRouter = require("./routes/UserRouter");
-const AuthRouter = require("./routes/AuthRouter");
-const passportSetup = require("./passport");
+const UserRouter = require("./routes/UserRouter");
+const TaskRouter = require("./routes/TaskRouter");
+const TruckRouter = require("./routes/TruckRouter");
+const MaintenanceRouter = require("./routes/MaintenanceRouter");
 
 const app = express();
 app.use(express.json());
@@ -35,11 +35,10 @@ const connect = async () => {
   }
 };
 
-app.use("/auth", AuthRouter);
-// app.use("/api/user", UserRouter);
-
-app.use(passport.initialize());
-app.use(passport.session());
+app.use("/api/user", UserRouter);
+app.use("/api/task", TaskRouter);
+app.use("/api/truck", TruckRouter);
+app.use("/api/maintenance", MaintenanceRouter);
 
 const PORT = 5000;
 app.listen(PORT, () => {

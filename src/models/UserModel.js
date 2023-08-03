@@ -6,13 +6,25 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    address: {
+      type: String,
+      required: true,
+    },
+    contactNumber: {
+      type: String,
+      required: true,
+    },
+    gender: {
+      type: String,
+      required: true,
+    },
     email: {
       type: String,
       required: true,
     },
     role: {
       type: String,
-      default: "user",
+      default: "driver",
     },
     password: {
       type: String,
@@ -23,4 +35,4 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Users", UserSchema);
+module.exports = mongoose.model("users", UserSchema);
