@@ -78,6 +78,18 @@ const getSpecificUserByEmail = async (req, res) => {
   }
 };
 
+const getUserById = async (req, res) => {
+  try {
+    if (req.params.id === "[object Object]") {
+      return null;
+    }
+    const user = await UserModel.findById(req.params.id);
+    res.status(200).json(user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getUserList = async (req, res) => {
   try {
     const userList = await UserModel.find();
@@ -87,9 +99,34 @@ const getUserList = async (req, res) => {
   }
 };
 
+const deleteUserById = async (req, res) => {
+  try {
+    const User = await UserModel.findByIdAndDelete(req.params.id);
+    res.status(200).json(User);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const updateUserById = async (req, res) => {
+  try {
+    const User = await UserModel.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(User);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
   getSpecificUserByEmail,
   getUserList,
+  deleteUserById,
+  updateUserById,
+  getUserById,
 };
