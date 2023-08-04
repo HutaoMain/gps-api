@@ -11,7 +11,10 @@ const createTruck = async (req, res) => {
 
 const getTruckById = async (req, res) => {
   try {
-    const Truck = await TruckModel.findById(req.params._id);
+    if (req.params.id === "[object Object]") {
+      return null;
+    }
+    const Truck = await TruckModel.findById(req.params.id);
     res.status(200).json(Truck);
   } catch (err) {
     console.log(err);
@@ -27,4 +30,32 @@ const getTruckList = async (req, res, next) => {
   }
 };
 
-module.exports = { createTruck, getTruckById, getTruckList };
+const deleteTruckById = async (req, res) => {
+  try {
+    const Truck = await TruckModel.findByIdAndDelete(req.params.id);
+    res.status(200).json(Truck);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const updateTruckById = async (req, res) => {
+  try {
+    const truck = await TruckModel.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(truck);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = {
+  createTruck,
+  getTruckById,
+  getTruckList,
+  deleteTruckById,
+  updateTruckById,
+};
