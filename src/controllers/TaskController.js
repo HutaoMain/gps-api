@@ -27,4 +27,17 @@ const getTaskList = async (req, res, next) => {
   }
 };
 
-module.exports = { createTask, getTaskById, getTaskList };
+const updateTaskById = async (req, res) => {
+  try {
+    const task = await TaskModel.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
+    );
+    res.status(200).json(task);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { createTask, getTaskById, getTaskList, updateTaskById };
