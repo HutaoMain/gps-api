@@ -2,7 +2,11 @@ const mongoose = require("mongoose");
 
 const TaskSchema = new mongoose.Schema(
   {
-    driverName: {
+    // driverName: {
+    //   type: String,
+    //   required: true,
+    // },
+    email: {
       type: String,
       required: true,
     },

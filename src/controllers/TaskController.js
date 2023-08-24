@@ -40,4 +40,22 @@ const updateTaskById = async (req, res) => {
   }
 };
 
-module.exports = { createTask, getTaskById, getTaskList, updateTaskById };
+const getTaskByEmailAndStatus = async (req, res, next) => {
+  try {
+    const task = await TaskModel.find({
+      email: req.params.email,
+      status: "Done",
+    });
+    res.status(200).json(task);
+  } catch (err) {
+    next(err);
+  }
+};
+
+module.exports = {
+  createTask,
+  getTaskById,
+  getTaskList,
+  updateTaskById,
+  getTaskByEmailAndStatus,
+};

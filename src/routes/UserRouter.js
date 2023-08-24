@@ -15,4 +15,6 @@ router.put("/update/:id", UserController.updateUserById);
 
 router.delete("/delete/:id", UserController.deleteUserById);
 
+router.get("/getRoleDriver", UserController.getRoleDriver);
+
 module.exports = router;
